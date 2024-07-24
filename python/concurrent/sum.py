@@ -18,6 +18,11 @@ def do_sum(path):
 
 if __name__ == "__main__":
     paths = sys.argv[1:]
+    tasks = []
     for path in paths:
-    #many error could be raised error. we don't care
         task = threading.Thread(target=thread_function, args=(path))
+        tasks.append(task)
+        task.start()
+    
+    for task in tasks:
+        task.join()
